@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华佳富互联网信息科技（深圳）有限公司 - 智能机器人与AI研发专家</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #0a0e17;
+            min-height: 100vh;
+            color: #e0e6ed;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 动态粒子背景 */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #00d4ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff;
+            animation: floatParticle 15s linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* 网格线背景 */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
+        }
+
+        /* 发光圆环 */
+        .glow-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            animation: pulseRing 4s ease-in-out infinite;
+        }
+
+        .glow-ring:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0s;
+        }
+
+        .glow-ring:nth-child(2) {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0.5s;
+        }
+
+        .glow-ring:nth-child(3) {
+            width: 800px;
+            height: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 
+                0 0 40px rgba(0, 212, 255, 0.3),
+                0 0 80px rgba(0, 212, 255, 0.15),
+                inset 0 0 30px rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+            animation: rotateGlow 4s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-icon span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.6rem;
+            color: #7eb8da;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #5a7a9a;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .main-business {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .business-tag {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 255, 136, 0.1) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .business-tag:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 255, 136, 0.2) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .building-notice {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 50px 60px;
+            text-align: center;
+            margin: 60px auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .building-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .building-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .building-notice h2 {
+            font-size: 2.4rem;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .building-notice p {
+            color: #7eb8da;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .features-section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #5a7a9a;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 42, 74, 0.6) 0%, rgba(10, 22, 35, 0.8) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.1) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            color: #e0e6ed;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #7eb8da;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .tech-stack {
+            background: linear-gradient(135deg, rgba(26, 42, 74, 0.4) 0%, rgba(10, 22, 35, 0.6) 100%);
+            border-radius: 25px;
+            padding: 60px;
+            margin: 60px auto;
+            max-width: 1000px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-align: center;
+        }
+
+        .tech-stack h3 {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        .tech-items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tech-item {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: #00d4ff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #5a7a9a;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        /* 扫描线效果 */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.5), transparent);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .business-tag {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .building-notice {
+                padding: 35px 25px;
+                margin: 40px 20px;
+            }
+
+            .building-icon {
+                font-size: 3.5rem;
+            }
+
+            .building-notice h2 {
+                font-size: 1.8rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .tech-stack {
+                padding: 40px 20px;
+                margin: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="hero">
+        <div class="grid-bg"></div>
+        <div class="particles" id="particles"></div>
+        <div class="glow-ring"></div>
+        <div class="glow-ring"></div>
+        <div class="glow-ring"></div>
+        
+        <div class="container">
+            <div class="header">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <span>🤖</span>
+                    </div>
+                    <div class="logo">
+                        <h1>华佳富互联网信息科技（深圳）有限公司</h1>
+                    </div>
+                    <p class="tagline">HUAJIAFU INTERNET INFORMATION TECHNOLOGY</p>
+                    <p class="subtitle">创新驱动发展，智能引领未来</p>
+                </div>
+                
+                <div class="main-business">
+                    <div class="business-tag">
+                        <span>🤖</span>
+                        <span>智能机器人研发</span>
+                    </div>
+                    <div class="business-tag">
+                        <span>🧠</span>
+                        <span>AI人工智能研发</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-notice">
+                <div class="building-icon">🔧</div>
+                <h2>网站正在建设中</h2>
+                <p>我们正在紧张地为您打造全新的数字化平台<br>即将呈现更精彩的内容与体验</p>
+            </div>
+            
+            <div class="features-section">
+                <div class="section-title">
+                    <h2>核心技术领域</h2>
+                    <p>深耕智能科技，赋能产业升级</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🦾</div>
+                        <h3>智能机器人研发</h3>
+                        <p>专注于工业机器人、服务机器人及特种机器人的研发与创新，为各行业提供智能化解决方案。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>人工智能算法</h3>
+                        <p>深度学习、计算机视觉、自然语言处理等AI核心技术的研发与应用，推动AI技术落地。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3>物联网集成</h3>
+                        <p>智能设备互联互通，构建完整的物联网生态系统，实现万物智联。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>大数据分析</h3>
+                        <p>海量数据采集、处理与分析，为企业决策提供数据支撑和智能洞察。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">☁️</div>
+                        <h3>云端服务</h3>
+                        <p>基于云计算平台的智能化服务部署与运维，提供稳定可靠的云端解决方案。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>系统集成</h3>
+                        <p>软硬件一体化集成服务，提供完整的智能系统解决方案与技术支持。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <h3>技术栈</h3>
+                <div class="tech-items">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">TensorFlow</span>
+                    <span class="tech-item">PyTorch</span>
+                    <span class="tech-item">ROS</span>
+                    <span class="tech-item">机器视觉</span>
+                    <span class="tech-item">深度学习</span>
+                    <span class="tech-item">自然语言处理</span>
+                    <span class="tech-item">边缘计算</span>
+                    <span class="tech-item">5G通信</span>
+                    <span class="tech-item">ARM架构</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 华佳富互联网信息科技（深圳）有限公司 版权所有</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 创建粒子效果
+        const particlesContainer = document.getElementById('particles');
+        
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            
+            // 随机颜色
+            const colors = ['#00d4ff', '#00ff88', '#00bfff', '#00ff9d'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // 卡片进入动画
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(40px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 500 + index * 150);
+        });
+    </script>
+</body>
+</html>
